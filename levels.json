@@ -16,6 +16,7 @@
       "level": 1,
       "recursions": 10,
       "clicks": 10,
+      "label": "spiral",
       "shape": [
         ["x", "o", "x", "x", "x"],
         ["x", "o", "x", "o", "x"],
@@ -28,6 +29,7 @@
       "level": 2,
       "recursions": 10,
       "clicks": 10,
+      "label": "test",
       "shape": [
         ["x", "o", "x", "x", "x"],
         ["x", "x", "x", "x", "x"],

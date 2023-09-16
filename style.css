@@ -39,8 +39,8 @@ body{
     transition: background-color 0.5s ease;
   }
 
-    .box:hover {
-        background-color: var(--accent);
+  .box:hover {
+    background-color: var(--accent);
     }
 
 .clicked{
@@ -61,33 +61,40 @@ body{
 }
 
 #control {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 1;
+}
 
-  
-  #control #reset {
-    background-color: var(--accent);
-    color: #fff;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-left: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+#reset {
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  z-index: 1;
+}
+
+#reset:hover {
+  background-color: red;
+}
+    #info {
     position: absolute;
-    bottom: 0;
-    z-index: 1;
-  }
-  
-  #reset:hover{
-    background-color: red;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    width: 100%;
+    padding: 10px;
+ 
   }
   #info-box{ 
     position:relative;
@@ -103,13 +110,7 @@ body{
 
 
   }
-  #info {
-    position: absolute;
-    grid-template-columns: repeat(3, 100px);
-    width: 100%;
-    padding: 10px;
- 
-  }
+
 
 
   #info > div > p {
