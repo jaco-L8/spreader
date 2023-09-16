@@ -1,0 +1,121 @@
+
+:root{
+    --text: #0a171f;
+    --background: #e8f2f8;
+    --primary: #82b9d9;
+    --secondary: #d4e7f2;
+    --accent: #a5404c;
+    --spreader: #69d469;
+}
+body{
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#box_container {
+    display: grid;
+
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
+    padding-top: 10vh;
+    position: relative;
+  }
+  
+  .box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--secondary);
+    border-radius: 10px;
+    background-color: var(--primary);
+    transition: background-color 0.5s ease;
+  }
+
+    .box:hover {
+        background-color: var(--accent);
+    }
+
+.clicked{
+    background-color: var(--accent);
+}
+
+.spreader{
+    background-color: var(--spreader);
+}
+
+
+.clear-box {
+  width : 100px;
+  height : 100px;
+  border : 1px solid var(--background);
+  border-radius : 10px;
+  background-color : var(--background);
+}
+
+#control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  
+  #control #reset {
+    background-color: var(--accent);
+    color: #fff;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+  }
+  
+  #reset:hover{
+    background-color: red;
+  }
+  #info-box{ 
+    position:relative;
+
+    width:100px;
+    height: 100px;
+    background-color: var(--primary);
+    border-radius: 10px;
+    border: 1px solid var(--secondary);
+    justify-content: center;
+    align-items: center; 
+
+
+
+  }
+  #info {
+    position: absolute;
+    grid-template-columns: repeat(3, 100px);
+    width: 100%;
+    padding: 10px;
+ 
+  }
+
+
+  #info > div > p {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent);
+    text-align: center;
+  }
