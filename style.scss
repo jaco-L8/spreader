@@ -1,0 +1,116 @@
+$primary-color: #82b9d9;
+$secondary-color: #d4e7f2;
+$accent-color: #a5404c;
+$background-color: #e8f2f8;
+$text-color: #0a171f;
+$spreader-color: #69d469;
+$box-size: 10px;
+
+body{
+    background-color: $background-color;
+    color: $text-color;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+@mixin box-shape{
+    width: $box-size;
+    height: $box-size;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#box_container {
+    display: grid;
+    grid-template-columns: repeat(2, $box-size);
+    grid-template-rows: repeat(2, $box-size);
+    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
+    padding-top: 5vh;
+    position: relative;
+
+    .box {
+        @include box-shape;
+        background-color: $primary-color;
+        transition: background-color 0.5s ease;
+
+        &:hover {
+            background-color: $accent-color;
+        }
+
+        &.clicked {
+            @extend .box;
+            background-color: $accent-color;
+        }
+    }
+
+    .spreader {
+        background-color: $spreader-color;
+    }
+
+    .clear-box {
+        @include box-shape;
+        background-color: $background-color;
+    }
+}
+
+#control {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 1;
+
+    #reset {
+        background-color: $accent-color;
+        color: #fff;
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        padding: 10px;
+        margin-left: 20px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        z-index: 1;
+
+        &:hover {
+            background-color: red;
+        }
+    }
+}
+
+#info {
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    width: 100%;
+    padding: 10px;
+
+    #info-box {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        background-color: $primary-color;
+        border-radius: 10px;
+        border: 1px solid $secondary-color;
+        justify-content: center;
+        align-items: center;
+
+        > div > p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: $accent-color;
+            text-align: center;
+        }
+    }
+}

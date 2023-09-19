@@ -1,3 +1,6 @@
+
+
+
 const boxContainer = document.getElementById('box_container');
 const reset = document.getElementById('reset');
 const levelSelect = document.getElementById('level-select');
@@ -6,6 +9,7 @@ const levelSelectButton = document.getElementById('apply-level');
 let numRows = 3;
 let numColumns = 3;
 let changedBoxes = new Set(); // Set to store IDs of changed boxes
+let numChangedBoxes = 0;
 let level = 4;
 let levels;
 
@@ -21,6 +25,82 @@ fetch('levels.json')
 boxContainer.addEventListener('click', handleBoxClick);
 reset.addEventListener('click', resetGrid);
 
+// Add event listener to the window to update the grid when the window is resized
+window.addEventListener('resize', function updateGrid() {
+    // Set the grid style
+    setGridStyle();
+});
+
+
+// claculate the new style for the grid based on the screen size
+function calculateStyle() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    console.log(`the current screen width is ${screenWidth} and the current screen height is ${screenHeight}`);
+    let boxSize, gridGap, boarderRadius;
+
+    if (screenWidth >= 3000 && screenHeight >= 1680) {
+        boxSize = '100px';
+        gridGap = '10px';
+        boarderRadius = '10px';
+        console.log('the style is set to prefix 3000');
+
+    } else if (screenWidth >= 1920 && screenHeight >= 1080) {
+        boxSize = '80px';
+        gridGap = '8px';
+        boarderRadius = '8px';
+        console.log('the style is set to prefix 1920');
+
+    } else if (screenWidth >= 1000 && screenHeight >= 563) {
+        boxSize = '60px';
+        gridGap = '6px';
+        boarderRadius = '6px';
+        console.log('the style is set to prefix 1000');
+
+    } else if (screenWidth >= 600 && screenHeight >= 338) {
+        boxSize = '50px';
+        gridGap = '5px';
+        boarderRadius = '5px';
+        console.log('the style is set to prefix 600');
+
+    } else {
+        boxSize = '40px';
+        gridGap = '4px';
+        boarderRadius = '4px';
+        console.log('the style is set to prefix 0');
+    }
+    
+    return { boxSize, gridGap, boarderRadius };
+}
+
+// Set the style for the grid and boxes
+function setGridStyle() {
+    // Get the level data for the current level
+    const levelData = levels.find(l => l.level === level);
+    const shape = levelData.shape;
+    const numRows = shape.length;
+    const numColumns = shape[0].length;
+    const style = calculateStyle();
+
+    boxContainer.style.gridTemplateColumns = `repeat(${numColumns}, ${style.boxSize})`;
+    boxContainer.style.gridTemplateRows = `repeat(${numRows}, ${style.boxSize})`;
+    boxContainer.style.gap = style.gridGap;
+
+    const boxes = document.querySelectorAll('.box , .clear-box');
+    boxes.forEach(box => {
+        box.style.width = style.boxSize;
+        box.style.height = style.boxSize;
+        box.style.borderRadius = style.borderRadius;
+    });
+
+    // Calculate the vertical padding to center the grid
+    const totalGridHeight = numRows * parseInt(style.boxSize) + (numRows - 1) * parseInt(style.gridGap) - 2 * parseInt(style.gridGap);
+    const windowHeight = window.innerHeight;
+    const paddingVertical = (windowHeight - totalGridHeight) / 2;
+    boxContainer.style.paddingTop = `${paddingVertical}px`;
+    console.log(`the screen hight is ${windowHeight} the padding is ${paddingVertical}`);
+}
+
 // Create the grid
 function createGrid() {
     // Get the level data for the current level
@@ -29,9 +109,6 @@ function createGrid() {
     const numRows = shape.length;
     const numColumns = shape[0].length;
 
-    // Set the grid template columns and rows
-    boxContainer.style.gridTemplateColumns = `repeat(${numColumns}, 100px)`;
-    boxContainer.style.gridTemplateRows = `repeat(${numRows}, 100px)`;
     // Clear the existing grid
     boxContainer.innerHTML = '';
 
@@ -56,9 +133,25 @@ function createGrid() {
             boxContainer.appendChild(box);
         }
     }
+
+    // Set the grid style
+    setGridStyle();
+
 }
 
-let numChangedBoxes = 0;
+// Update the grid when the window is resized
+
+
+
+// Reset the grid
+function resetGrid() {
+    changedBoxes.clear(); // Clear set of changed boxes
+    createGrid();
+    numChangedBoxes = 0;
+    boxContainer.addEventListener('click', handleBoxClick);
+}
+
+
 
 function handleBoxClick(event) {
     const levelData = levels.find(l => l.level === level);
@@ -82,13 +175,7 @@ function handleBoxClick(event) {
     }
 }
 
-// Reset the grid
-function resetGrid() {
-    changedBoxes.clear(); // Clear set of changed boxes
-    createGrid();
-    numChangedBoxes = 0;
-    boxContainer.addEventListener('click', handleBoxClick);
-}
+
 
 const RIPPLE_DELAY = 100; // 100 milliseconds delay for ripple effect
 
