@@ -40,8 +40,8 @@ function calculateStyle() {
     const numColumns = shape[0].length;
 
     // Get the current screen width and height
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
     console.log(`The current screen width is ${screenWidth} and the current screen height is ${screenHeight}`);
 
     // Calculate the aspect ratio of the screen
