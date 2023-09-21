@@ -51,7 +51,7 @@ function calculateStyle() {
     const isMobile = screenWidth <= 768 && window.devicePixelRatio >= 2;
 
     // Adjust parameters based on device type
-    const baseSize = isMobile ? 30 : 45; // Adjust these values for mobile and desktop
+    const baseSize = isMobile ? 25 : 45; // Adjust these values for mobile and desktop
     const baseGap = baseSize / 10;
     const baseBorderRadius = baseSize / 5;
 
