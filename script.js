@@ -10,7 +10,7 @@ let numRows = 3;
 let numColumns = 3;
 let changedBoxes = new Set(); // Set to store IDs of changed boxes
 let numChangedBoxes = 0;
-let level = 1;
+let level = 4;
 let levels;
 
 fetch('levels.json')
@@ -49,9 +49,9 @@ function calculateStyle() {
     const screenAspectRatio = screenWidth / screenHeight;
 
     // Calculate the base size and gap
-    const baseSize = 50; // Adjust this value to control the base size
-    const baseGap = 5; // Adjust this value to control the base gap
-    const baseBorderRadius = 10; // Adjust this value to control the base border radius
+    const baseSize = 45; // Adjust this value to control the base size
+    const baseGap = baseSize / 10; // Adjust this value to control the base gap
+    const baseBorderRadius = baseSize / 5; // Adjust this value to control the base border radius
 
     // Calculate the adjusted size and gap based on screen aspect ratio
     const aspectRatioFactor = 1 + (Math.abs(screenAspectRatio - 1) * 0.2); // Adjust the factor as needed
@@ -61,12 +61,12 @@ function calculateStyle() {
     
 
     // Calculate size adjustment based on the number of rows and columns
-    const sizeAdjustment = 0.1 * (numRows + numColumns); // Adjust this value as needed
+    const sizeAdjustment = 0.3 * (numRows + numColumns); // Adjust this value as needed
 
     // Apply size adjustment
     const adjustedBoxSize = boxSize - sizeAdjustment;
-    const adjustedGridGap = gridGap - sizeAdjustment;
-    const adjustedBorderRadius = borderRadius - sizeAdjustment;
+    const adjustedGridGap = gridGap - (sizeAdjustment / 10);
+    const adjustedBorderRadius = borderRadius - (sizeAdjustment / 5);
 
     console.log(`the style is set to boxSize: ${adjustedBoxSize}px, gridGap: ${adjustedGridGap}px, borderRadius: ${adjustedBorderRadius}px`);
 
@@ -108,6 +108,8 @@ function createGrid() {
     const shape = levelData.shape;
     const numRows = shape.length;
     const numColumns = shape[0].length;
+
+    console.log(`the current level is ${level} that has a length of ${numRows} rows and ${numColumns} columns`);
 
     // Clear the existing grid
     boxContainer.innerHTML = '';
