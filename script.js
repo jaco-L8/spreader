@@ -10,7 +10,7 @@ let numRows = 3;
 let numColumns = 3;
 let changedBoxes = new Set(); // Set to store IDs of changed boxes
 let numChangedBoxes = 0;
-let level = 4;
+let level = 1;
 let levels;
 
 fetch('levels.json')
@@ -34,43 +34,43 @@ window.addEventListener('resize', function updateGrid() {
 
 // claculate the new style for the grid based on the screen size
 function calculateStyle() {
+    // Get the level data for the current level
+    const levelData = levels.find(l => l.level === level);
+    const shape = levelData.shape;
+    const numRows = shape.length;
+    const numColumns = shape[0].length;
+
+    // Get the current screen width and height
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     console.log(`the current screen width is ${screenWidth} and the current screen height is ${screenHeight}`);
-    let boxSize, gridGap, boarderRadius;
 
-    if (screenWidth >= 3000 && screenHeight >= 1680) {
-        boxSize = '100px';
-        gridGap = '10px';
-        boarderRadius = '10px';
-        console.log('the style is set to prefix 3000');
+    // Calculate the aspect ratio of the screen
+    const screenAspectRatio = screenWidth / screenHeight;
 
-    } else if (screenWidth >= 1920 && screenHeight >= 1080) {
-        boxSize = '80px';
-        gridGap = '8px';
-        boarderRadius = '8px';
-        console.log('the style is set to prefix 1920');
+    // Calculate the base size and gap
+    const baseSize = 50; // Adjust this value to control the base size
+    const baseGap = 5; // Adjust this value to control the base gap
+    const baseBorderRadius = 10; // Adjust this value to control the base border radius
 
-    } else if (screenWidth >= 1000 && screenHeight >= 563) {
-        boxSize = '60px';
-        gridGap = '6px';
-        boarderRadius = '6px';
-        console.log('the style is set to prefix 1000');
-
-    } else if (screenWidth >= 600 && screenHeight >= 338) {
-        boxSize = '50px';
-        gridGap = '5px';
-        boarderRadius = '5px';
-        console.log('the style is set to prefix 600');
-
-    } else {
-        boxSize = '40px';
-        gridGap = '4px';
-        boarderRadius = '4px';
-        console.log('the style is set to prefix 0');
-    }
+    // Calculate the adjusted size and gap based on screen aspect ratio
+    const aspectRatioFactor = 1 + (Math.abs(screenAspectRatio - 1) * 0.2); // Adjust the factor as needed
+    const boxSize = baseSize * aspectRatioFactor;
+    const gridGap = baseGap * aspectRatioFactor;
+    const borderRadius = baseBorderRadius * aspectRatioFactor;
     
-    return { boxSize, gridGap, boarderRadius };
+
+    // Calculate size adjustment based on the number of rows and columns
+    const sizeAdjustment = 0.1 * (numRows + numColumns); // Adjust this value as needed
+
+    // Apply size adjustment
+    const adjustedBoxSize = boxSize - sizeAdjustment;
+    const adjustedGridGap = gridGap - sizeAdjustment;
+    const adjustedBorderRadius = borderRadius - sizeAdjustment;
+
+    console.log(`the style is set to boxSize: ${adjustedBoxSize}px, gridGap: ${adjustedGridGap}px, borderRadius: ${adjustedBorderRadius}px`);
+
+    return { boxSize: `${adjustedBoxSize}px`, gridGap: `${adjustedGridGap}px`, borderRadius: `${adjustedBorderRadius}px` };
 }
 
 // Set the style for the grid and boxes
