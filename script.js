@@ -32,7 +32,6 @@ window.addEventListener('resize', function updateGrid() {
 });
 
 
-// claculate the new style for the grid based on the screen size
 function calculateStyle() {
     // Get the level data for the current level
     const levelData = levels.find(l => l.level === level);
@@ -43,35 +42,38 @@ function calculateStyle() {
     // Get the current screen width and height
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    console.log(`the current screen width is ${screenWidth} and the current screen height is ${screenHeight}`);
+    console.log(`The current screen width is ${screenWidth} and the current screen height is ${screenHeight}`);
 
     // Calculate the aspect ratio of the screen
     const screenAspectRatio = screenWidth / screenHeight;
 
-    // Calculate the base size and gap
-    const baseSize = 45; // Adjust this value to control the base size
-    const baseGap = baseSize / 10; // Adjust this value to control the base gap
-    const baseBorderRadius = baseSize / 5; // Adjust this value to control the base border radius
+    // Determine if it's a mobile device based on screen width and device pixel ratio
+    const isMobile = screenWidth <= 768 && window.devicePixelRatio >= 2;
+
+    // Adjust parameters based on device type
+    const baseSize = isMobile ? 30 : 45; // Adjust these values for mobile and desktop
+    const baseGap = baseSize / 10;
+    const baseBorderRadius = baseSize / 5;
 
     // Calculate the adjusted size and gap based on screen aspect ratio
-    const aspectRatioFactor = 1 + (Math.abs(screenAspectRatio - 1) * 0.2); // Adjust the factor as needed
+    const aspectRatioFactor = 1 + (Math.abs(screenAspectRatio - 1) * 0.2);
     const boxSize = baseSize * aspectRatioFactor;
     const gridGap = baseGap * aspectRatioFactor;
     const borderRadius = baseBorderRadius * aspectRatioFactor;
-    
 
     // Calculate size adjustment based on the number of rows and columns
-    const sizeAdjustment = 0.3 * (numRows + numColumns); // Adjust this value as needed
+    const sizeAdjustment = 0.3 * (numRows + numColumns);
 
     // Apply size adjustment
     const adjustedBoxSize = boxSize - sizeAdjustment;
     const adjustedGridGap = gridGap - (sizeAdjustment / 10);
     const adjustedBorderRadius = borderRadius - (sizeAdjustment / 5);
 
-    console.log(`the style is set to boxSize: ${adjustedBoxSize}px, gridGap: ${adjustedGridGap}px, borderRadius: ${adjustedBorderRadius}px`);
+    console.log(`The style is set to boxSize: ${adjustedBoxSize}px, gridGap: ${adjustedGridGap}px, borderRadius: ${adjustedBorderRadius}px`);
 
     return { boxSize: `${adjustedBoxSize}px`, gridGap: `${adjustedGridGap}px`, borderRadius: `${adjustedBorderRadius}px` };
 }
+
 
 // Set the style for the grid and boxes
 function setGridStyle() {
