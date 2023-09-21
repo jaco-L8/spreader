@@ -40,8 +40,8 @@ function calculateStyle() {
     const numColumns = shape[0].length;
 
     // Get the current screen width and height
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
     console.log(`The current screen width is ${screenWidth} and the current screen height is ${screenHeight}`);
 
     // Calculate the aspect ratio of the screen
@@ -51,7 +51,7 @@ function calculateStyle() {
     const isMobile = screenWidth <= 768 && window.devicePixelRatio >= 2;
 
     // Adjust parameters based on device type
-    const baseSize = isMobile ? 25 : 45; // Adjust these values for mobile and desktop
+    const baseSize = isMobile ? 30 : 45; // Adjust these values for mobile and desktop
     const baseGap = baseSize / 10;
     const baseBorderRadius = baseSize / 5;
 
