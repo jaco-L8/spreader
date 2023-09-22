@@ -6,7 +6,7 @@ if (sessionStorage.getItem("passwordEntered")) {
 } else {
     // Password has not been entered in this session, prompt for it
     var password = prompt("Please enter the password to access this page:");
-    if (password === "boinger") {
+    if (password === "TestPass" || password === "Peechat") {
         // Password is correct, set flag in sessionStorage
         sessionStorage.setItem("passwordEntered", true);
     } else {
