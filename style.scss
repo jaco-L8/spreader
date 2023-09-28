@@ -1,16 +1,17 @@
-$primary-color: #82b9d9;
-$secondary-color: #d4e7f2;
-$accent-color: #a5404c;
-$background-color: #e8f2f8;
-$text-color: #0a171f;
-$spreader-color: #69d469;
+$text: #e1e1ef;
+$background: #050531;
+$primary: #7a7a7f;
+$secondary: #141424;
+$accent: #59aa59;
+$spreader: #cfcf37;
 $box-size: 10px;
-$header-bg-color: #333;
-$header-text-color: #fff;
+$header-bg: #333;
+$header-text: #fff;
+$reset-bg: #d35454;
 
 body{
-    background-color: $background-color;
-    color: $text-color;
+    background: $background;
+    color: $text;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
@@ -23,8 +24,9 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $header-bg-color;
-  color: $header-text-color;
+  background: $background;
+  border-bottom: 1px solid $primary;
+  color: $header-text;
   padding: 10px;
 
   h1 {
@@ -54,26 +56,39 @@ body{
 
     .box {
         @include box-shape;
-        background-color: $primary-color;
-        transition: background-color 0.5s ease;
+        background: $primary;
+        transition: background 0.5s ease;
 
         &:hover {
-            background-color: $accent-color;
+            background: $accent;
         }
 
         &.clicked {
             @extend .box;
-            background-color: $accent-color;
+            background: $accent;
+            animation: click-animation 0.3s ease;
+        }
+    }
+
+    @keyframes click-animation {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
         }
     }
 
     .spreader {
-        background-color: $spreader-color;
+        background: $spreader;
     }
 
     .clear-box {
         @include box-shape;
-        background-color: $background-color;
+        background: $background;
     }
 }
 
@@ -86,7 +101,7 @@ body{
     z-index: 1;
 
     #reset {
-        background-color: $accent-color;
+        background: $reset-bg;
         color: #fff;
         font-weight: bold;
         justify-content: center;
@@ -97,11 +112,11 @@ body{
         padding: 10px;
         margin-left: 20px;
         cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
+        transition: background 0.2s ease-in-out;
         z-index: 1;
 
         &:hover {
-            background-color: red;
+            background: red;
         }
     }
 }
