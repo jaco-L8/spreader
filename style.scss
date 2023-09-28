@@ -5,6 +5,8 @@ $background-color: #e8f2f8;
 $text-color: #0a171f;
 $spreader-color: #69d469;
 $box-size: 10px;
+$header-bg-color: #333;
+$header-text-color: #fff;
 
 body{
     background-color: $background-color;
@@ -15,6 +17,23 @@ body{
     margin: 0;
     padding: 0;
     text-align: center;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $header-bg-color;
+  color: $header-text-color;
+  padding: 10px;
+
+  h1 {
+    margin: 1;
+  }
+
+  #level-display {
+    font-size: 20px;
+  }
 }
 
 @mixin box-shape{
@@ -31,7 +50,6 @@ body{
     justify-content: center;
     align-items: center;
     grid-gap: 10px;
-    padding-top: 5vh;
     position: relative;
 
     .box {
@@ -88,29 +106,22 @@ body{
     }
 }
 
-#info {
-    position: absolute;
+#level-info {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    width: 100%;
-    padding: 10px;
-
-    #info-box {
-        position: relative;
-        width: 100px;
-        height: 100px;
-        background-color: $primary-color;
-        border-radius: 10px;
-        border: 1px solid $secondary-color;
-        justify-content: center;
-        align-items: center;
-
-        > div > p {
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-            color: $accent-color;
-            text-align: center;
-        }
+    grid-template-columns: repeat(2, $box-size + 100px);
+    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
+    padding-top: 2%;
+    padding-right: 15%;
+    position: relative;
+  
+    p {
+      margin: 0;
+      font-size: 18px;
     }
-}
+  
+    span {
+      font-weight: bold;
+    }
+  }

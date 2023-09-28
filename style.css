@@ -9,6 +9,21 @@ body {
   text-align: center;
 }
 
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+#header h1 {
+  margin: 1;
+}
+#header #level-display {
+  font-size: 20px;
+}
+
 #box_container {
   display: grid;
   grid-template-columns: repeat(2, 10px);
@@ -16,7 +31,6 @@ body {
   justify-content: center;
   align-items: center;
   grid-gap: 10px;
-  padding-top: 5vh;
   position: relative;
 }
 #box_container .box, #box_container .box.clicked {
@@ -71,27 +85,20 @@ body {
   background-color: red;
 }
 
-#info {
-  position: absolute;
+#level-info {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  width: 100%;
-  padding: 10px;
-}
-#info #info-box {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  background-color: #82b9d9;
-  border-radius: 10px;
-  border: 1px solid #d4e7f2;
+  grid-template-columns: repeat(2, 110px);
   justify-content: center;
   align-items: center;
+  grid-gap: 10px;
+  padding-top: 2%;
+  padding-right: 15%;
+  position: relative;
 }
-#info #info-box > div > p {
+#level-info p {
   margin: 0;
-  font-size: 24px;
+  font-size: 18px;
+}
+#level-info span {
   font-weight: bold;
-  color: #a5404c;
-  text-align: center;
 }/*# sourceMappingURL=style.css.map */

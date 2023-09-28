@@ -1,10 +1,11 @@
 
-
-
 const boxContainer = document.getElementById('box_container');
 const reset = document.getElementById('reset');
 const levelSelect = document.getElementById('level-select');
 const levelSelectButton = document.getElementById('apply-level');
+const leveldisplay = document.getElementById('level-display');
+const spreadNum = document.getElementById('spread-num');
+const clicksNum = document.getElementById('clicks-num');
 
 let numRows = 3;
 let numColumns = 3;
@@ -17,9 +18,12 @@ fetch('levels.json')
     .then(response => response.json())
     .then(data => {
         levels = data;
+        clicks = levels.find(l => l.level === level).clicks;
         createGrid(); // creates innitial grid
         createLevelSelect(); // creates level select dropdown menu (temporary)
     });
+
+
 
 // Add event listeners to the buttons
 boxContainer.addEventListener('click', handleBoxClick);
@@ -98,9 +102,10 @@ function setGridStyle() {
     // Calculate the vertical padding to center the grid
     const totalGridHeight = numRows * parseInt(style.boxSize) + (numRows - 1) * parseInt(style.gridGap) - 2 * parseInt(style.gridGap);
     const windowHeight = window.innerHeight;
-    const paddingVertical = (windowHeight - totalGridHeight) / 2;
+    const paddingVertical = (windowHeight - totalGridHeight) / 3;
     boxContainer.style.paddingTop = `${paddingVertical}px`;
     console.log(`the screen hight is ${windowHeight} the padding is ${paddingVertical}`);
+    
 }
 
 // Create the grid
@@ -110,6 +115,13 @@ function createGrid() {
     const shape = levelData.shape;
     const numRows = shape.length;
     const numColumns = shape[0].length;
+
+    // set the level display
+    leveldisplay.innerHTML = `Level ${level}`;
+    spreadNum.innerHTML = levelData.recursions + 1;
+
+    clicks = levels.find(l => l.level === level).clicks;
+    clicksNum.innerHTML = clicks;
 
     console.log(`the current level is ${level} that has a length of ${numRows} rows and ${numColumns} columns`);
 
@@ -161,7 +173,9 @@ function handleBoxClick(event) {
     const levelData = levels.find(l => l.level === level);
     const boxes = document.querySelectorAll('.box'); // Moved here so it updates every time
     const box = event.target;
-    const clicks = levelData.clicks;
+    const setclicks = levelData.clicks;
+
+    
 
     // Check if the clicked element is a box and doesn't have the 'clicked' class
     if (Array.from(boxes).includes(box) && !box.classList.contains('clicked')) {
@@ -169,11 +183,12 @@ function handleBoxClick(event) {
         box.classList.remove('spreader');
         changeNeighborClass(box, levelData.recursions);
         changedBoxes.add(box.id);
-
+        clicks--;
+        clicksNum.innerHTML = clicks;
         numChangedBoxes++;
 
         // If all boxes have the 'clicked' class
-        if (numChangedBoxes === boxes.length || numChangedBoxes === clicks) {
+        if (numChangedBoxes === boxes.length || numChangedBoxes === setclicks) {
             boxContainer.removeEventListener('click', handleBoxClick);
         }
     }

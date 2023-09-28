@@ -14,8 +14,8 @@
     },
     {
       "level": 1,
-      "recursions": 10,
-      "clicks": 10,
+      "recursions": 16,
+      "clicks": 1,
       "label": "spiral",
       "shape": [
         ["x", "o", "x", "x", "x"],
