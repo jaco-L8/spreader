@@ -13,6 +13,7 @@ let changedBoxes = new Set(); // Set to store IDs of changed boxes
 let numChangedBoxes = 0;
 let level = 4;
 let levels;
+let winState = 0;
 
 fetch('levels.json')
     .then(response => response.json())
