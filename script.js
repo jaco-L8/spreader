@@ -61,7 +61,13 @@ function calculateStyle() {
     const baseBorderRadius = baseSize / 5;
 
     // Calculate the adjusted size and gap based on screen aspect ratio
-    const aspectRatioFactor = 1 + (Math.abs(screenAspectRatio - 1) * 0.2);
+    let aspectRatioFactor = 1 + (Math.abs(screenAspectRatio - 1) * 0.2);
+    if (screenWidth < 1440) {
+        aspectRatioFactor -= 0.1;
+    }
+    if (screenWidth < 1550) {
+        aspectRatioFactor -= 0.3;
+    }
     const boxSize = baseSize * aspectRatioFactor;
     const gridGap = baseGap * aspectRatioFactor;
     const borderRadius = baseBorderRadius * aspectRatioFactor;
@@ -270,3 +276,14 @@ function createLevelSelect() {
     // Add event listener to the level select button
     levelSelectButton.addEventListener('click', applyLevel);
 }
+// check box listener to show dev tools or hide them
+const checkbox = document.getElementById('dev-tools-checkbox');
+
+checkbox.addEventListener('change', (event) => {
+    const selectWrapper = document.getElementById('select-wrapper');
+    if (event.target.checked) {
+        selectWrapper.style.display = 'block';
+    } else {
+        selectWrapper.style.display = 'none';
+    }
+});

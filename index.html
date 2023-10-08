@@ -11,28 +11,34 @@
 
     <div id="header">
         <h1>Game Test 1</h1>
-        <div id="level-display">Level: 1</div>
-    </div>
+        <div id="level-display">Level: 1</div>    
+        <div id="level-info">
+            <p>Spread: <span id="spread-num">0</span></p>
+            <p>Clicks: <span id="clicks-num">0</span></p>
+        </div>
+        <div id="dev-tools">
+            <div id="dev-tools-toggle">
+                <input type="checkbox" id="dev-tools-checkbox"> dev tools </input>
+            </div>
+            <div id="select-wrapper">
+                <label for="level-select">Select Level:</label>
+                <select id="level-select"></select>
+                <button id="apply-level">Apply Level</button>
+            </div>
+        </div>
+        </div>
+        
+        </div>
+
 
     <div id="control">
         <!--reset button-->
         <div id="reset">Reset</div>
-        <div>
-            <label for="level-select">Select Level:</label>
-            <select id="level-select"></select>
-            <button id="apply-level">Apply Level</button>
-        </div>
     </div>
-
     <!--3x3 grid of boxes-->
     <div id="box_container"></div>
 
     <!-- level info -->
-    <div id="level-info">
-        <p>Spread: <span id="spread-num">0</span></p>
-        <p>Clicks: <span id="clicks-num">0</span></p>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>

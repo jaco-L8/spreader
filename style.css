@@ -114,4 +114,8 @@ body {
 }
 #level-info span {
   font-weight: bold;
+}
+
+#select-wrapper {
+  display: none;
 }/*# sourceMappingURL=style.css.map */
